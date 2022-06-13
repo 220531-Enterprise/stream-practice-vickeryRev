@@ -1,6 +1,7 @@
 package com.revature.challenge;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
@@ -109,7 +110,7 @@ public class StreamTest {
         				.collect(Collectors.toList());
         
         //cal for each on list
-        stuWith3333.forEach(s -> System.out.println(s.getName()));
+        stuWith3333.forEach(s -> System.out.println(s));
         
         
         /***************************************************************************
@@ -146,9 +147,13 @@ public class StreamTest {
         List<TempStudent> tmpStudents = Arrays.asList(tmpStud1, tmpStud2);
         
         // Code your Solution here, don't touch the code above
- 
-
-        
+       System.out.println("\nq5");
+        List<Student> studentList =  tmpStudents.stream().
+        		map(s -> new Student(s.name, s.age, new Address(s.address.getZipcode()) , s.mobileNumbers)) 
+        		.collect(Collectors.toList());
+        for(Student s : studentList) {
+        	System.out.println(s);
+        }
         
         
  
@@ -158,10 +163,14 @@ public class StreamTest {
              Print it to the console.
         ****************************************************************************/
 
-        
+       System.out.println("q6");
         // Code your Solution here
 
+        List<String> stuStrings = studentList.stream()
+        		.map(s -> s.getName())
+        		.collect(Collectors.toList());
         
+        stuStrings.forEach(s -> System.out.println(s));
         
         
         
@@ -172,10 +181,12 @@ public class StreamTest {
 
         
         // Code your Solution here
-
+        System.out.println("q7");
+        String name = studentList.stream()
+        			.map(s -> s.getName())
+        			.collect(Collectors.joining(" "));
         
-        
-        
+        System.out.println(name);
         
         /****************************************************************************
          (8) Change all the Strings within the List<String> nameList to Upper Case.
@@ -186,8 +197,11 @@ public class StreamTest {
  
         // Code your Solution here, don't touch the code above
 
-        
-        
+        System.out.println("q8");
+        List<String> UnameList = nameList.stream()
+        		.map(s -> s.toUpperCase())
+        		.collect(Collectors.toList());
+       UnameList.forEach(s -> System.out.println(s));
         
         
         /****************************************************************************
@@ -198,8 +212,12 @@ public class StreamTest {
             Arrays.asList("Bob", "Danny", "Alice", "Eddie", "Cathy");
  
         // Code your Solution here, don't touch the code above
-
-
+        System.out.println("q9");
+        List<String> SnameList = namesList.stream()
+        		.sorted()
+        		.collect(Collectors.toList());
+        
+        SnameList.forEach(a -> System.out.println(a));
         
         
  
