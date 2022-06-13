@@ -54,7 +54,27 @@ public class StreamTest {
 
         
         // Code your Solution here
-
+        Optional<Student> posBob = students.stream()
+        		.filter(s -> s.getName().equals("Bob"))
+        		.findFirst();
+        
+        System.out.println(posBob.isPresent() ? posBob.get().getName() : "No student found");
+        		/*
+		 * Copyright 2022 the original author or authors.
+		 *
+		 * Licensed under the Apache License, Version 2.0 (the "License");
+		 * you may not use this file except in compliance with the License.
+		 * You may obtain a copy of the License at
+		 *
+		 *      https://www.apache.org/licenses/LICENSE-2.0
+		 *
+		 * Unless required by applicable law or agreed to in writing, software
+		 * distributed under the License is distributed on an "AS IS" BASIS,
+		 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+		 * See the License for the specific language governing permissions and
+		 * limitations under the License.
+		 */
+ 
         
         
         
@@ -64,7 +84,10 @@ public class StreamTest {
              HINT: Store students.stream()...etc to an Optional<Student> in the case that the student
              doesn't exist. Resource: https://www.geeksforgeeks.org/java-8-optional-class/
         ****************************************************************************/
-
+        Optional<Student>s1 = students.stream()
+        		.filter(s -> s.getAddress().getZipcode().equals("1235"))
+        		.findFirst();
+        System.out.println(s1.isPresent() ? s1.get().getName() : "No student found");
         
         // Code your Solution here
 
@@ -79,9 +102,14 @@ public class StreamTest {
 
         
         // Code your Solution here
-
+        //can have a stream within a stream
+        List<Student> stuWith3333 = students.stream()
+        		.filter(s -> s.getMobileNumbers()
+        				.stream().anyMatch(num -> num.getNumber().equals("3333")))
+        				.collect(Collectors.toList());
         
-        
+        //cal for each on list
+        stuWith3333.forEach(s -> System.out.println(s.getName()));
         
         
         /***************************************************************************
@@ -89,12 +117,14 @@ public class StreamTest {
              names to the console.
          ***************************************************************************/
 
-        
+        System.out.println("q4");
         // Code your Solution here
+        List<Student> stuWithNums = students.stream()
+        		.filter(s -> s.getMobileNumbers()
+        				.stream().anyMatch(num -> (num.getNumber().equals("3333") || (num.getNumber().equals("1234")))))
+        				.collect(Collectors.toList());
         
-        
-        
-        
+        stuWithNums.forEach(s -> System.out.println(s.getName()));
         
         /***************************************************************************
 	     (5) Create a List<Student> from the tmpStudents List. Call it studentList.
